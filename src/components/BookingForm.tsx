@@ -9,6 +9,7 @@ import { menu } from "@/data/menu";
 import { CheckCircle2, MessageCircle, AlertCircle, Send, Calculator } from "lucide-react";
 import confetti from "canvas-confetti";
 import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
 
 export default function BookingForm() {
   const [serverError, setServerError] = useState<string | null>(null);
@@ -67,15 +68,44 @@ export default function BookingForm() {
     setServerError(null);
 
     try {
-      const res = await fetch("/api/booking", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+      // 1. Try sending directly from frontend via EmailJS if configured
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "";
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "";
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "";
 
-      const json = await res.json();
-      if (!res.ok) {
-        throw new Error(json.error || "Submission failed");
+      if (serviceId && templateId && publicKey) {
+        await emailjs.send(
+          serviceId,
+          templateId,
+          {
+            to_email: "kukarakshan2004@gmail.com",
+            customer_name: data.name,
+            customer_whatsapp: data.whatsapp,
+            customer_call: data.callNumber || "Same as WhatsApp",
+            customer_email: data.email,
+            cake_variety: data.variety,
+            items_count: data.itemsCount || 1,
+            customer_budget: data.customerBudget || "Not specified",
+            size_weight: data.sizeWeight || "Not specified",
+            pickup_date: data.pickupDate,
+            preferred_time: data.preferredTime || "Flexible (9 AM - 9 PM)",
+            eggless: data.eggless ? "Yes (Eggless)" : "Standard recipe",
+            notes: data.description || "No special message",
+          },
+          publicKey
+        );
+      } else {
+        // Fallback to internal API route if EmailJS keys not yet provided
+        const res = await fetch("/api/booking", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+
+        const json = await res.json();
+        if (!res.ok) {
+          throw new Error(json.error || "Submission failed");
+        }
       }
 
       // Celebratory patisserie confetti burst!
@@ -89,7 +119,9 @@ export default function BookingForm() {
       setSuccessData(data);
       reset();
     } catch (err: any) {
-      setServerError(err.message || "An error occurred. Please try again or reach out on WhatsApp.");
+      console.error("Booking error:", err);
+      const detail = err?.text || err?.message || JSON.stringify(err);
+      setServerError(detail || "An error occurred. Please try again or reach out on WhatsApp.");
     } finally {
       setIsSubmitting(false);
     }

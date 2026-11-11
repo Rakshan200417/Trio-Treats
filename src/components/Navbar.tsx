@@ -28,22 +28,21 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
           ? "glass-nav shadow-md py-1 border-b border-[#FCEBEF]"
           : "bg-transparent py-2"
-      }`}
+        }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
         {/* Logo and Brand */}
         <Link href="/" className="flex items-center gap-3.5 group">
-          <div className="relative w-12 h-12 rounded-full overflow-hidden border border-[#C4666F]/25 bg-transparent shadow-sm flex items-center justify-center">
+          <div className="relative w-12 h-12 rounded-full overflow-hidden shadow-sm flex items-center justify-center transition-transform group-hover:scale-105">
             <Image
               src="/images/logo.png"
               alt="Trio Treats Logo"
               width={48}
               height={48}
-              className="w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform"
+              className="w-full h-full object-contain rounded-full"
               priority
             />
           </div>
