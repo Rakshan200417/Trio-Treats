@@ -269,7 +269,7 @@ export default function BookingForm() {
                 {/* 3. Call Number */}
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-wider text-[#2B1610]">
-                    Call Number <span className="text-[11px] font-normal lowercase text-[#66463D]">(if different)</span>
+                    Call Number <span className="text-[11px] font-normal lowercase text-[#66463D]">(optional / if different)</span>
                   </label>
                   <input
                     type="tel"
@@ -315,7 +315,7 @@ export default function BookingForm() {
                 {/* 6. Number of items */}
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-wider text-[#2B1610]">
-                    Number of items
+                    Number of items <span className="text-[11px] font-normal lowercase text-[#66463D]">(optional)</span>
                   </label>
                   <input
                     type="number"
@@ -341,7 +341,7 @@ export default function BookingForm() {
                 {/* 8. Size or weight */}
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-wider text-[#2B1610]">
-                    Size or weight
+                    Size or weight <span className="text-[11px] font-normal lowercase text-[#66463D]">(optional)</span>
                   </label>
                   <input
                     type="text"
@@ -351,7 +351,7 @@ export default function BookingForm() {
                   />
                 </div>
 
-                {/* 8. Pickup Date */}
+                {/* 9. Pickup Date */}
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-wider text-[#2B1610]">
                     Pickup Date * <span className="text-[11px] font-normal lowercase text-[#66463D]">(at least 2 days notice)</span>
@@ -365,10 +365,10 @@ export default function BookingForm() {
                   {errors.pickupDate && <p className="text-xs text-red-500">{errors.pickupDate.message}</p>}
                 </div>
 
-                {/* 9. Preferred Time */}
+                {/* 10. Preferred Time */}
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-wider text-[#2B1610]">
-                    Preferred Time <span className="text-[11px] font-normal lowercase text-[#66463D]">(09:00 to 21:00)</span>
+                    Preferred Time <span className="text-[11px] font-normal lowercase text-[#66463D]">(optional / 09:00 to 21:00)</span>
                   </label>
                   <input
                     type="time"
@@ -379,7 +379,7 @@ export default function BookingForm() {
                   />
                 </div>
 
-                {/* 10. Eggless Checkbox */}
+                {/* 11. Eggless Checkbox */}
                 <div className="flex items-center gap-3 pt-6 sm:col-span-2">
                   <input
                     type="checkbox"
@@ -392,10 +392,10 @@ export default function BookingForm() {
                   </label>
                 </div>
 
-                {/* 11. Description / Custom notes */}
+                {/* 12. Description / Custom notes */}
                 <div className="space-y-2 sm:col-span-2">
                   <label className="text-xs font-bold uppercase tracking-wider text-[#2B1610]">
-                    Description &amp; Custom Message
+                    Description &amp; Custom Message <span className="text-[11px] font-normal lowercase text-[#66463D]">(optional)</span>
                   </label>
                   <textarea
                     rows={3}
