@@ -78,7 +78,7 @@ export default function BookingForm() {
           serviceId,
           templateId,
           {
-            to_email: "kukarakshan2004@gmail.com",
+            to_email: "sulakshayohenran@icloud.com",
             customer_name: data.name,
             customer_whatsapp: data.whatsapp,
             customer_call: data.callNumber || "Same as WhatsApp",

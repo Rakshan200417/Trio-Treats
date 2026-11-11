@@ -4,7 +4,7 @@ import { site } from "@/data/site";
 
 const resendApiKey = process.env.RESEND_API_KEY;
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
-const bakerEmail = process.env.BOOKING_TO_EMAIL || "kukarakshan2004@gmail.com";
+const bakerEmail = process.env.BOOKING_TO_EMAIL || "sulakshayohenran@icloud.com";
 
 export async function sendBookingEmails(data: BookingFormData) {
   if (!resend) {
